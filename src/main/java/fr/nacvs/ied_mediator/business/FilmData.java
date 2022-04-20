@@ -82,6 +82,10 @@ public class FilmData {
 	public void setIncomeWorldwide(long incomeWorldwide) {
 		this.incomeWorldwide = incomeWorldwide;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "FilmData [title=" + title + ", date=" + date + ", genre=" + genre + ", distributor=" + distributor + ", budget=" + budget + ", incomeUs="
+				+ incomeUs + ", incomeWorldwide=" + incomeWorldwide + "]";
+	}
 }
