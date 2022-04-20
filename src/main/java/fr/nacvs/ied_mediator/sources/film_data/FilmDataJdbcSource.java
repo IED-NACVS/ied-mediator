@@ -15,12 +15,12 @@ import org.slf4j.LoggerFactory;
 import fr.nacvs.ied_mediator.business.FilmData;
 import fr.nacvs.ied_mediator.dao.FilmDataDao;
 
-public class FilmDataSource implements FilmDataDao {
+public class FilmDataJdbcSource implements FilmDataDao {
 
 	private static final String QUERY_BY_TITLE = "SELECT * FROM film_data WHERE title=?";
 	private static final String QUERY_BY_TITLE_AND_DATE = "SELECT * FROM film_data WHERE title=? AND date=?";
 
-	private static Logger LOGGER = LoggerFactory.getLogger(FilmDataSource.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(FilmDataJdbcSource.class);
 
 	private DatabaseConnection dbConnection = new DatabaseConnection();
 

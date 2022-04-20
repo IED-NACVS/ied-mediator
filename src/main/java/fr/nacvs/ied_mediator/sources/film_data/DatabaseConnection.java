@@ -26,13 +26,13 @@ public class DatabaseConnection {
 	public DatabaseConnection() {
 		// Init connection from properties file
 		PropertiesHandler handler = PropertiesHandler.getInstance();
-		driver = handler.getProperty("database.driver");
-		host = handler.getProperty("database.host");
-		port = handler.getProperty("database.port");
-		username = handler.getProperty("database.user");
-		password = handler.getProperty("database.password");
-		dbName = handler.getProperty("database.name");
-		optionalParams = handler.getProperty("database.optional_url_params");
+		driver = handler.getProperty("film_data.database.driver");
+		host = handler.getProperty("film_data.database.host");
+		port = handler.getProperty("film_data.database.port");
+		username = handler.getProperty("film_data.database.user");
+		password = handler.getProperty("film_data.database.password");
+		dbName = handler.getProperty("film_data.database.name");
+		optionalParams = handler.getProperty("film_data.database.optional_url_params");
 		connection = createConnection();
 	}
 

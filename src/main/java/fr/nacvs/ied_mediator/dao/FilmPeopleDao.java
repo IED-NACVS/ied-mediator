@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.Optional;
 
-import fr.nacvs.ied_mediator.business.FilmData;
 import fr.nacvs.ied_mediator.business.FilmPeople;
 
 public interface FilmPeopleDao {

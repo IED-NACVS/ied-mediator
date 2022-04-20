@@ -96,4 +96,12 @@ public class RespFilmByTitle {
 	public void setActors(List<String> actors) {
 		this.actors = actors;
 	}
+
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
 }

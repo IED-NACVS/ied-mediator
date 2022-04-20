@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.nacvs.ied_mediator.dao.FilmDataDao;
-import fr.nacvs.ied_mediator.sources.film_data.FilmDataSource;
+import fr.nacvs.ied_mediator.sources.film_data.FilmDataJdbcSource;
 import fr.nacvs.ied_mediator.util.DateUtils;
 
 public class TestFilmDataDao {
@@ -17,7 +17,7 @@ public class TestFilmDataDao {
 
 		String title = "Avatar";
 		LOGGER.info("Find all films with title {}", title);
-		FilmDataDao dao = new FilmDataSource();
+		FilmDataDao dao = new FilmDataJdbcSource();
 		dao.findByTitle(title)
 				.forEachRemaining(System.out::println);
 
