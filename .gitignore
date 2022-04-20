@@ -101,6 +101,7 @@ local.properties
 ### Java ###
 # Compiled class file
 *.class
+application.properties
 
 # Log file
 *.log

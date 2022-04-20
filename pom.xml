@@ -26,8 +26,6 @@
 			<version>4.4.0</version>
 		</dependency>
 
-
-
 		<!-- REST REQUESTS -->
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
