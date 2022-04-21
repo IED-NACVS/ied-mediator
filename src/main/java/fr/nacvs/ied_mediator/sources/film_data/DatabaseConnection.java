@@ -7,10 +7,8 @@ import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.nacvs.ied_mediator.config.PropertiesHandler;
-
 public class DatabaseConnection {
-	
+
 	private static Logger LOGGER = LoggerFactory.getLogger(DatabaseConnection.class);
 
 	private String driver;
@@ -23,16 +21,15 @@ public class DatabaseConnection {
 
 	private Connection connection;
 
-	public DatabaseConnection() {
-		// Init connection from properties file
-		PropertiesHandler handler = PropertiesHandler.getInstance();
-		driver = handler.getProperty("film_data.database.driver");
-		host = handler.getProperty("film_data.database.host");
-		port = handler.getProperty("film_data.database.port");
-		username = handler.getProperty("film_data.database.user");
-		password = handler.getProperty("film_data.database.password");
-		dbName = handler.getProperty("film_data.database.name");
-		optionalParams = handler.getProperty("film_data.database.optional_url_params");
+	public DatabaseConnection(String driver, String host, String port, String username, String password, String dbName, String optionalParams) {
+		super();
+		this.driver = driver;
+		this.host = host;
+		this.port = port;
+		this.optionalParams = optionalParams;
+		this.username = username;
+		this.password = password;
+		this.dbName = dbName;
 		connection = createConnection();
 	}
 
@@ -50,7 +47,7 @@ public class DatabaseConnection {
 	private String createUrl() {
 		return "jdbc:" + driver + "://" + host + ":" + port + "/" + dbName + optionalParams;
 	}
-	
+
 	public Connection getConnection() {
 		return connection;
 	}

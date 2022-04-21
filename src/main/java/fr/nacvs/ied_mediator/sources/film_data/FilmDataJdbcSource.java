@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.nacvs.ied_mediator.business.FilmData;
+import fr.nacvs.ied_mediator.config.FilmDataSourceProperties;
 import fr.nacvs.ied_mediator.dao.FilmDataDao;
 
 public class FilmDataJdbcSource implements FilmDataDao {
@@ -22,7 +23,18 @@ public class FilmDataJdbcSource implements FilmDataDao {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(FilmDataJdbcSource.class);
 
-	private DatabaseConnection dbConnection = new DatabaseConnection();
+	private DatabaseConnection dbConnection;
+	
+	public FilmDataJdbcSource(FilmDataSourceProperties properties) {
+		this.dbConnection = new DatabaseConnection(
+				properties.getDriver(),
+				properties.getHost(),
+				properties.getPort(),
+				properties.getUser(),
+				properties.getPassword(),
+				properties.getDatabaseName(),
+				properties.getOptionalParams());
+	}
 
 	@Override
 	public Iterator<FilmData> findByTitle(String title) {

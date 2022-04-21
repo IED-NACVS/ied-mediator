@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.nacvs.ied_mediator.config.SpringIoc;
 import fr.nacvs.ied_mediator.dao.FilmDataDao;
 import fr.nacvs.ied_mediator.sources.film_data.FilmDataJdbcSource;
 import fr.nacvs.ied_mediator.util.DateUtils;
@@ -17,7 +18,7 @@ public class TestFilmDataDao {
 
 		String title = "Avatar";
 		LOGGER.info("Find all films with title {}", title);
-		FilmDataDao dao = new FilmDataJdbcSource();
+		FilmDataDao dao = SpringIoc.getBean(FilmDataDao.class);
 		dao.findByTitle(title)
 				.forEachRemaining(System.out::println);
 
