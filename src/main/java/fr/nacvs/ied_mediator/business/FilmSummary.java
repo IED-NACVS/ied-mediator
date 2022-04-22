@@ -6,6 +6,7 @@ public class FilmSummary {
 
 	private String title;
 	private LocalDate date;
+	private String director;
 	private String summary;
 
 	public FilmSummary() {
@@ -41,5 +42,13 @@ public class FilmSummary {
 
 	public void setSummary(String summary) {
 		this.summary = summary;
+	}
+
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
 	}
 }
