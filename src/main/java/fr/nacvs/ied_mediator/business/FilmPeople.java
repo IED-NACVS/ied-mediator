@@ -65,4 +65,14 @@ public class FilmPeople {
 		this.producers = producers;
 	}
 
+	@Override
+	public String toString() {
+		return "FilmPeople{" +
+						"title='" + title + '\'' +
+						", date=" + date +
+						", director='" + director + '\'' +
+						", actors=" + actors +
+						", producers=" + producers +
+						'}';
+	}
 }
