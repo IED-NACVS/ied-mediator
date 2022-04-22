@@ -1,7 +1,10 @@
-package fr.nacvs.ied_mediator.api;
+package fr.nacvs.ied_mediator.api.film_of_actor;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import fr.nacvs.ied_mediator.business.FilmData;
+import fr.nacvs.ied_mediator.business.FilmPeople;
 
 public class RespOneFilmOfActor {
 	private String title;
@@ -23,6 +26,18 @@ public class RespOneFilmOfActor {
 		this.distributor = distributor;
 		this.director = director;
 		this.producers = producers;
+	}
+	
+	public void fillDataInfos(FilmData data) {
+		this.title = data.getTitle();
+		this.date = data.getDate();
+		this.genre = data.getGenre();
+		this.distributor = data.getDistributor();
+	}
+	
+	public void fillPeopleInfos(FilmPeople people) {
+		this.producers = people.getProducers();
+		this.director = people.getDirector();
 	}
 
 	public String getTitle() {

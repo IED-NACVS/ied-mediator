@@ -24,7 +24,7 @@ public class TestFilmDataDao {
 
 		String title2 = "John Carter";
 		LocalDate date = DateUtils.toDate("2012-03-09");
-		LOGGER.info("Find film by title {} and date {}", title2, date);
+		LOGGER.info("Find film with title {} and date {}", title2, date);
 		dao.findByTitleAndDate(title2, date)
 				.ifPresentOrElse(System.out::println, actionIfNotFound());
 

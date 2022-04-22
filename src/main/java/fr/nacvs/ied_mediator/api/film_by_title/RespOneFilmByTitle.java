@@ -1,26 +1,30 @@
-package fr.nacvs.ied_mediator.api;
+package fr.nacvs.ied_mediator.api.film_by_title;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RespFilmByTitle {
+import fr.nacvs.ied_mediator.business.FilmData;
+import fr.nacvs.ied_mediator.business.FilmPeople;
+import fr.nacvs.ied_mediator.business.FilmSummary;
+
+public class RespOneFilmByTitle {
 
 	private LocalDate date;
-	private String genre;
-	private String distributor;
+	private String genre = "";
+	private String distributor = "";
 	private long budget;
 	private long incomeUs;
 	private long incomeWorldwide;
-	private String director;
-	private String summary;
+	private String director = "";
+	private String summary = "";
 	private List<String> actors = new ArrayList<>(0);
 
-	public RespFilmByTitle() {
+	public RespOneFilmByTitle() {
 		super();
 	}
 
-	public RespFilmByTitle(LocalDate date, String genre, String distributor, long budget, long incomeUs, long incomeWorldwide, String summary,
+	public RespOneFilmByTitle(LocalDate date, String genre, String distributor, long budget, long incomeUs, long incomeWorldwide, String summary,
 			List<String> actors) {
 		super();
 		this.date = date;
@@ -32,7 +36,26 @@ public class RespFilmByTitle {
 		this.summary = summary;
 		this.actors = actors;
 	}
+	
+	public void fillDataInfos(FilmData filmData) {
+		this.date = filmData.getDate();
+		this.budget = filmData.getBudget();
+		this.genre = filmData.getGenre();
+		this.incomeUs = filmData.getIncomeUs();
+		this.incomeWorldwide = filmData.getIncomeWorldwide();
+	}
 
+	public void fillPeopleInfos(FilmPeople filmPeople) {
+		this.date = filmPeople.getDate();
+		this.director = filmPeople.getDirector();
+		this.actors = filmPeople.getActors();
+	}
+	
+	public void fillSummaryInfos(FilmSummary filmSummary) {
+		this.date = filmSummary.getDate();
+		this.summary = filmSummary.getSummary();
+	}
+	
 	public LocalDate getDate() {
 		return date;
 	}
