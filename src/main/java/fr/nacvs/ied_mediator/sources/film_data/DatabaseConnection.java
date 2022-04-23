@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DatabaseConnection {
+class DatabaseConnection {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(DatabaseConnection.class);
 
@@ -34,9 +34,12 @@ public class DatabaseConnection {
 	}
 
 	private Connection createConnection() {
+		LOGGER.info("Try connecting to database " + dbName);
 		try {
 			String url = createUrl();
-			return DriverManager.getConnection(url, username, password);
+			Connection conn = DriverManager.getConnection(url, username, password);
+			LOGGER.info("Successfully connected to database " + dbName);
+			return conn;
 		} catch (SQLException e) {
 			// Cannot do more here, we have to stop the program
 			LOGGER.error("Error while connecting to database : " + e.getMessage());

@@ -1,4 +1,4 @@
-package fr.nacvs.ied_mediator.api.film_of_actor;
+package fr.nacvs.ied_mediator.api.responses.film_of_actor;
 
 import java.util.ArrayList;
 import java.util.List;

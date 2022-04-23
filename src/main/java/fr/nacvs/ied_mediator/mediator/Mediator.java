@@ -1,7 +1,7 @@
 package fr.nacvs.ied_mediator.mediator;
 
-import fr.nacvs.ied_mediator.api.film_by_title.RespFilmsByTitle;
-import fr.nacvs.ied_mediator.api.film_of_actor.RespFilmsOfActor;
+import fr.nacvs.ied_mediator.api.responses.film_by_title.RespFilmsByTitle;
+import fr.nacvs.ied_mediator.api.responses.film_of_actor.RespFilmsOfActor;
 
 public interface Mediator {
 
