@@ -7,11 +7,9 @@ import java.io.Writer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.nacvs.ied_mediator.api.response_writer.ResponseFormat;
 import fr.nacvs.ied_mediator.api.response_writer.ResponseWriter;
 import fr.nacvs.ied_mediator.api.responses.film_by_title.RespFilmsByTitle;
 import fr.nacvs.ied_mediator.api.responses.film_of_actor.RespFilmsOfActor;
@@ -37,6 +35,7 @@ public class MediatorApplication {
 		ResponseWriter responseWriter = requestParams.getOutputFormat().createWriter();
 		String outputFile = responseWriter.renameFilename(requestParams.getOutputPath());
 		Path outputPath = Paths.get(outputFile);
+		
 		switch (requestParams.getRequestType()) {
 		case FILMS_BY_TITLE:
 			handleFilmsByTitle(query, responseWriter, outputPath);
