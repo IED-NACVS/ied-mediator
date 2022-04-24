@@ -24,4 +24,9 @@ public class RespFilmsByTitle {
 		this.films = films;
 	}
 
+	@Override
+	public String toString() {
+		return "RespFilmsByTitle [films=" + films + "]";
+	}
+
 }

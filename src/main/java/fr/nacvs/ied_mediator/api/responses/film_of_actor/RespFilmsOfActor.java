@@ -19,4 +19,9 @@ public class RespFilmsOfActor {
 	public void setFilms(List<RespOneFilmOfActor> films) {
 		this.films = films;
 	}
+
+	@Override
+	public String toString() {
+		return "RespFilmsOfActor [films=" + films + "]";
+	}
 }

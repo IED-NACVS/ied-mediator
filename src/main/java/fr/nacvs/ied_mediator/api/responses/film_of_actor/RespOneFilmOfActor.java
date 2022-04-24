@@ -36,6 +36,8 @@ public class RespOneFilmOfActor {
 	}
 	
 	public void fillPeopleInfos(FilmPeople people) {
+		this.title = people.getTitle();
+		this.date = people.getDate();
 		this.producers = people.getProducers();
 		this.director = people.getDirector();
 	}
@@ -86,5 +88,11 @@ public class RespOneFilmOfActor {
 
 	public void setProducers(List<String> producers) {
 		this.producers = producers;
+	}
+
+	@Override
+	public String toString() {
+		return "RespOneFilmOfActor [title=" + title + ", date=" + date + ", genre=" + genre + ", distributor=" + distributor + ", director=" + director
+				+ ", producers=" + producers + "]";
 	}
 }

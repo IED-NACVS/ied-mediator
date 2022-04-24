@@ -89,6 +89,7 @@ public class XmlHelper {
 		try {
 			expression = xPath.compile(xPathQuery);
 		} catch (XPathExpressionException exception) {
+			LOGGER.error(xPathQuery);
 			LOGGER.error("Error while compiling XPath expression : ", exception.getMessage());
 			throw new IllegalArgumentException(exception);
 		}

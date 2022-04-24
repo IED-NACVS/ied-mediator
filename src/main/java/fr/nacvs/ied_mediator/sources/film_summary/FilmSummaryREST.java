@@ -9,6 +9,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -54,7 +55,7 @@ public class FilmSummaryREST implements FilmSummaryDao {
 
 	@Override
 	public Optional<FilmSummary> findByTitleAndDate(String title, LocalDate date) {
-		LOGGER.info("Find film summary by title and date");
+		LOGGER.debug("Find film summary by title and date");
 		return findImdbIdsByTitle(title)
 				.stream()
 				.map(this::performFilmDetailsRequest)
@@ -62,10 +63,10 @@ public class FilmSummaryREST implements FilmSummaryDao {
 				.findFirst()
 				.map(this::createFromDetails);
 	}
-	
+
 	@Override
 	public Optional<FilmSummary> findByTitleAndDirector(String title, String director) {
-		LOGGER.info("Find film summary by title and director");
+		LOGGER.debug("Find film summary by title and director");
 		return findImdbIdsByTitle(title)
 				.stream()
 				.map(this::performFilmDetailsRequest)
@@ -81,7 +82,9 @@ public class FilmSummaryREST implements FilmSummaryDao {
 			return List.of();
 		}
 		// Find all nodes with precise title
-		String queryFilms = String.format("/root/result[@title = '%s']", title);
+		// Escaped because we want to avoid error with quotes etc
+		String titleEscaped = StringEscapeUtils.escapeXml11(title);
+		String queryFilms = String.format("/root/result[@title = '%s']", titleEscaped);
 		NodeList nodeList = xmlHelper.findNodeList(response, queryFilms);
 		// Retrieve imdb ids in order to perform next requests
 		List<String> imdbIds = new ArrayList<>();
@@ -92,7 +95,7 @@ public class FilmSummaryREST implements FilmSummaryDao {
 		}
 		return imdbIds;
 	}
-	
+
 	// ==== REQUESTS ====
 
 	private Document performSearchRequest(String title) {
@@ -119,7 +122,7 @@ public class FilmSummaryREST implements FilmSummaryDao {
 				.get(String.class);
 		return xmlHelper.loadXml(stringResponse);
 	}
-	
+
 	// ==== XML RELATIVE ====
 
 	// ---- On search response ----
@@ -130,33 +133,38 @@ public class FilmSummaryREST implements FilmSummaryDao {
 	private String findErrorMessage(Document response) {
 		return xmlHelper.findString(response, "/root/error");
 	}
-	
+
 	// ==== On details response
 	private String findTitle(Document response) {
 		return xmlHelper.findString(response, "/root/movie/@title");
 	}
-	
+
 	private LocalDate findReleaseDate(Document response) {
 		String dateStr = xmlHelper.findString(response, "/root/movie/@released");
 		return DateUtils.toDateShortMonth(dateStr);
 	}
-	
+
 	private String findDirector(Document response) {
 		return xmlHelper.findString(response, "/root/movie/@director");
 	}
-	
+
 	private String findSummary(Document response) {
 		return xmlHelper.findString(response, "/root/movie/@plot");
 	}
-	
+
 	private boolean haveCorrectDate(Document response, LocalDate date) {
 		return date.equals(findReleaseDate(response));
 	}
-	
+
 	private boolean haveCorrectDirector(Document response, String director) {
-		return director.equals(findDirector(response));
+		// The api does not return the full name of the director, bu only the begin and
+		// the end, with the begin altered (as a surname generally). So we can only
+		// trust the last name, i.e the last word found
+		String directorFound = findDirector(response);
+		String[] split = directorFound.split(" ");
+		return director.endsWith(split[split.length - 1]);
 	}
-	
+
 	private FilmSummary createFromDetails(Document response) {
 		LocalDate date = findReleaseDate(response);
 		String director = findDirector(response);

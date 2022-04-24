@@ -53,7 +53,7 @@ public class FilmDataJdbcSource implements FilmDataDao {
 
 	@Override
 	public Optional<FilmData> findByTitleAndDate(String title, LocalDate date) {
-		LOGGER.info("Find from film data source by title and date");
+		LOGGER.debug("Find from film data source by title and date");
 		Connection connection = dbConnection.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(QUERY_BY_TITLE_AND_DATE)){
 			statement.setString(1, title);

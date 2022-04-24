@@ -39,6 +39,7 @@ public class RespOneFilmByTitle {
 	
 	public void fillDataInfos(FilmData filmData) {
 		this.date = filmData.getDate();
+		this.distributor = filmData.getDistributor();
 		this.budget = filmData.getBudget();
 		this.genre = filmData.getGenre();
 		this.incomeUs = filmData.getIncomeUs();
@@ -46,13 +47,11 @@ public class RespOneFilmByTitle {
 	}
 
 	public void fillPeopleInfos(FilmPeople filmPeople) {
-		this.date = filmPeople.getDate();
 		this.director = filmPeople.getDirector();
 		this.actors = filmPeople.getActors();
 	}
 	
 	public void fillSummaryInfos(FilmSummary filmSummary) {
-		this.date = filmSummary.getDate();
 		this.summary = filmSummary.getSummary();
 	}
 	
@@ -126,5 +125,11 @@ public class RespOneFilmByTitle {
 
 	public void setDirector(String director) {
 		this.director = director;
+	}
+
+	@Override
+	public String toString() {
+		return "RespOneFilmByTitle [date=" + date + ", genre=" + genre + ", distributor=" + distributor + ", budget=" + budget + ", incomeUs=" + incomeUs
+				+ ", incomeWorldwide=" + incomeWorldwide + ", director=" + director + ", summary=" + summary + ", actors=" + actors + "]";
 	}
 }
