@@ -13,10 +13,11 @@ public class FilmSummary {
 		super();
 	}
 
-	public FilmSummary(String title, LocalDate date, String summary) {
+	public FilmSummary(String title, LocalDate date, String director, String summary) {
 		super();
 		this.title = title;
 		this.date = date;
+		this.director = director;
 		this.summary = summary;
 	}
 

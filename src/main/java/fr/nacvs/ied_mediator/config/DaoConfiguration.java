@@ -1,17 +1,14 @@
 package fr.nacvs.ied_mediator.config;
 
-import java.time.LocalDate;
-import java.util.Optional;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import fr.nacvs.ied_mediator.business.FilmSummary;
 import fr.nacvs.ied_mediator.dao.FilmDataDao;
 import fr.nacvs.ied_mediator.dao.FilmPeopleDao;
 import fr.nacvs.ied_mediator.dao.FilmSummaryDao;
 import fr.nacvs.ied_mediator.sources.film_data.FilmDataJdbcSource;
 import fr.nacvs.ied_mediator.sources.film_people.FilmPeopleSparql;
+import fr.nacvs.ied_mediator.sources.film_summary.FilmSummaryREST;
 
 @Configuration
 public class DaoConfiguration {
@@ -27,19 +24,7 @@ public class DaoConfiguration {
 	}
 	
 	@Bean
-	public FilmSummaryDao filmSummaryDao() {
-		// TODO : temporary, remove this
-		return new FilmSummaryDao() {
-			
-			@Override
-			public Optional<FilmSummary> findByTitleAndDirector(String title, String director) {
-				return Optional.empty();
-			}
-			
-			@Override
-			public Optional<FilmSummary> findByTitleAndDate(String title, LocalDate date) {
-				return Optional.empty();
-			}
-		};
+	public FilmSummaryDao filmSummaryDao(FilmSummaryProperties properties) {
+		return new FilmSummaryREST(properties);
 	}
 }

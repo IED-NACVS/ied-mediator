@@ -33,10 +33,16 @@
 			<version>2.35</version>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-client</artifactId>
-			<version>1.19.4</version>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+			<version>2.35</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
 		<!-- DATABASE CONNECTION -->
 		<dependency>
 			<groupId>mysql</groupId>
