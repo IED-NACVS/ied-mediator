@@ -51,4 +51,14 @@ public class FilmSummary {
 	public void setDirector(String director) {
 		this.director = director;
 	}
+
+	@Override
+	public String toString() {
+		return "FilmSummary{" +
+						"title='" + title + '\'' +
+						", date=" + date +
+						", director='" + director + '\'' +
+						", summary='" + summary + '\'' +
+						'}';
+	}
 }
