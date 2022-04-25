@@ -19,7 +19,7 @@ import fr.nacvs.ied_mediator.dao.FilmDataDao;
 public class FilmDataJdbcSource implements FilmDataDao {
 
 	private static final String QUERY_BY_TITLE = "SELECT * FROM film_data WHERE title=?";
-	private static final String QUERY_BY_TITLE_AND_DATE = "SELECT * FROM film_data WHERE title=? AND date=?";
+	private static final String QUERY_BY_TITLE_AND_DATE = "SELECT * FROM film_data WHERE title=? AND YEAR(date)=?";
 
 	private static Logger LOGGER = LoggerFactory.getLogger(FilmDataJdbcSource.class);
 
@@ -57,8 +57,9 @@ public class FilmDataJdbcSource implements FilmDataDao {
 		Connection connection = dbConnection.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(QUERY_BY_TITLE_AND_DATE)){
 			statement.setString(1, title);
-			statement.setDate(2, Date.valueOf(date));
+			statement.setInt(2, date.getYear());
 			statement.execute();
+			System.out.println(statement);
 			ResultSet resultSet = statement.getResultSet();
 			FilmData filmData = null;
 			if (resultSet.next()) {

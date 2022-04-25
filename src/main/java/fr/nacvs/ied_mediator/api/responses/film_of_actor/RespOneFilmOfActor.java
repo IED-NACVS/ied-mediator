@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.nacvs.ied_mediator.business.FilmData;
 import fr.nacvs.ied_mediator.business.FilmPeople;
+import fr.nacvs.ied_mediator.business.FilmSummary;
 
 public class RespOneFilmOfActor {
 	private String title;
@@ -40,6 +41,10 @@ public class RespOneFilmOfActor {
 		this.date = people.getDate();
 		this.producers = people.getProducers();
 		this.director = people.getDirector();
+	}
+	
+	public void fillSummaryInfos(FilmSummary summary) {
+		this.date = summary.getDate();
 	}
 
 	public String getTitle() {

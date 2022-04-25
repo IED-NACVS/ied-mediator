@@ -83,8 +83,8 @@ public class FilmSummaryREST implements FilmSummaryDao {
 		}
 		// Find all nodes with precise title
 		// Escaped because we want to avoid error with quotes etc
-		String titleEscaped = StringEscapeUtils.escapeXml11(title);
-		String queryFilms = String.format("/root/result[@title = '%s']", titleEscaped);
+		String titleEscaped = StringEscapeUtils.escapeHtml4(title.replaceAll(":([^\\s])", ": $1"));
+		String queryFilms = String.format("/root/result[@title = \"%s\"]", titleEscaped);
 		NodeList nodeList = xmlHelper.findNodeList(response, queryFilms);
 		// Retrieve imdb ids in order to perform next requests
 		List<String> imdbIds = new ArrayList<>();
@@ -136,7 +136,8 @@ public class FilmSummaryREST implements FilmSummaryDao {
 
 	// ==== On details response
 	private String findTitle(Document response) {
-		return xmlHelper.findString(response, "/root/movie/@title");
+		// We want to have spaces after each ":"
+		return xmlHelper.findString(response, "/root/movie/@title").replaceAll(":([^\\s])", ": $1");
 	}
 
 	private LocalDate findReleaseDate(Document response) {
@@ -153,7 +154,7 @@ public class FilmSummaryREST implements FilmSummaryDao {
 	}
 
 	private boolean haveCorrectDate(Document response, LocalDate date) {
-		return date.equals(findReleaseDate(response));
+		return date.getYear() == findReleaseDate(response).getYear();
 	}
 
 	private boolean haveCorrectDirector(Document response, String director) {

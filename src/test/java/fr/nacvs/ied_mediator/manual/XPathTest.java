@@ -2,6 +2,7 @@ package fr.nacvs.ied_mediator.manual;
 
 import java.time.LocalDate;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -14,9 +15,11 @@ public class XPathTest {
 	public static void main(String[] args) {
 		XmlHelper helper = new XmlHelper();
 
+		System.out.println("Pirates of the Caribbean: Dead Man's Chest".replaceAll(":([^\\s])", ": $1"));
+		
 //		testErrorResponse(helper);
-//		testValidResponse(helper);
-		testDetailsResponse(helper);
+		testValidResponse(helper);
+//		testDetailsResponse(helper);
 	}
 
 	private static void testErrorResponse(XmlHelper helper) {
@@ -31,34 +34,27 @@ public class XPathTest {
 
 	private static void testValidResponse(XmlHelper helper) {
 		// Find result count
-		Document response = helper.loadXml("<root totalResults=\"48\" response=\"True\">\r\n" +
-				"<result title=\"The Avengers\" year=\"2012\" imdbID=\"tt0848228\" type=\"movie\" poster=\"https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg\"/>\r\n"
-				+
-				"<result title=\"The Avengers\" year=\"1998\" imdbID=\"tt0118661\" type=\"movie\" poster=\"https://m.media-amazon.com/images/M/MV5BYWE1NTdjOWQtYTQ2Ny00Nzc5LWExYzMtNmRlOThmOTE2N2I4XkEyXkFqcGdeQXVyNjUwNzk3NDc@._V1_SX300.jpg\"/>\r\n"
-				+
-				"<result title=\"The Avengers: Earth's Mightiest Heroes\" year=\"2010–2012\" imdbID=\"tt1626038\" type=\"series\" poster=\"https://m.media-amazon.com/images/M/MV5BYzA4ZjVhYzctZmI0NC00ZmIxLWFmYTgtOGIxMDYxODhmMGQ2XkEyXkFqcGdeQXVyNjExODE1MDc@._V1_SX300.jpg\"/>\r\n"
-				+
-				"<result title=\"Ultimate Avengers: The Movie\" year=\"2006\" imdbID=\"tt0491703\" type=\"movie\" poster=\"https://m.media-amazon.com/images/M/MV5BMTYyMjk0NTMwMl5BMl5BanBnXkFtZTgwNzY0NjAwNzE@._V1_SX300.jpg\"/>\r\n"
-				+
-				"<result title=\"The Avengers\" year=\"1961–1969\" imdbID=\"tt0054518\" type=\"series\" poster=\"https://m.media-amazon.com/images/M/MV5BZWQwZTdjMDUtNTY1YS00MDI0LWFkNjYtZDA4MDdmZjdlMDRlXkEyXkFqcGdeQXVyNjUwNzk3NDc@._V1_SX300.jpg\"/>\r\n"
-				+
-				"<result title=\"The New Avengers\" year=\"1976–1977\" imdbID=\"tt0074031\" type=\"series\" poster=\"https://m.media-amazon.com/images/M/MV5BMTIwNDg4NzE1N15BMl5BanBnXkFtZTcwNTIwMDYyMQ@@._V1_SX300.jpg\"/>\r\n"
-				+
-				"<result title=\"The Avengers\" year=\"1942\" imdbID=\"tt0034639\" type=\"movie\" poster=\"https://m.media-amazon.com/images/M/MV5BODY2NWFjZTUtNTU2Ni00NWU5LTgwNDItMTQwYzdhYTFhMzlhXkEyXkFqcGdeQXVyMDY4MzkyNw@@._V1_SX300.jpg\"/>\r\n"
-				+
-				"<result title=\"Marvel Disk Wars: The Avengers\" year=\"2014–2015\" imdbID=\"tt3644256\" type=\"series\" poster=\"https://m.media-amazon.com/images/M/MV5BNDZmYjNmYTktNDVjMi00N2I0LWI0MjEtNzEyYzYzZjU5MGEwXkEyXkFqcGdeQXVyNjExODE1MDc@._V1_SX300.jpg\"/>\r\n"
-				+
-				"<result title=\"The Shaolin Avengers\" year=\"1976\" imdbID=\"tt0074513\" type=\"movie\" poster=\"https://m.media-amazon.com/images/M/MV5BMzc3NWViYjktNDEwMy00NTY2LTkyMTMtMDZjYzUxMGRhYjg1XkEyXkFqcGdeQXVyNjUzNzQ4NDQ@._V1_SX300.jpg\"/>\r\n"
-				+
-				"<result title=\"Captain America and the Avengers\" year=\"1991\" imdbID=\"tt0421939\" type=\"game\" poster=\"https://m.media-amazon.com/images/M/MV5BZDhiN2JlMTUtZTZjZS00ODM3LWE1YmYtYjk2MTkxZmNhNGYxXkEyXkFqcGdeQXVyNDQ2OTk4MzI@._V1_SX300.jpg\"/>\r\n"
-				+
+		Document response = helper.loadXml("<root totalResults=\"20\" response=\"True\">\r\n" + 
+				"<result title=\"Pirates of the Caribbean: The Curse of the Black Pearl\" year=\"2003\" imdbID=\"tt0325980\" type=\"movie\" poster=\"https://m.media-amazon.com/images/M/MV5BNGYyZGM5MGMtYTY2Ni00M2Y1LWIzNjQtYWUzM2VlNGVhMDNhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg\"/>\r\n" + 
+				"<result title=\"Pirates of the Caribbean: Dead Man's Chest\" year=\"2006\" imdbID=\"tt0383574\" type=\"movie\" poster=\"https://m.media-amazon.com/images/M/MV5BMTcwODc1MTMxM15BMl5BanBnXkFtZTYwMDg1NzY3._V1_SX300.jpg\"/>\r\n" + 
+				"<result title=\"Pirates of the Caribbean: At World's End\" year=\"2007\" imdbID=\"tt0449088\" type=\"movie\" poster=\"https://m.media-amazon.com/images/M/MV5BMjIyNjkxNzEyMl5BMl5BanBnXkFtZTYwMjc3MDE3._V1_SX300.jpg\"/>\r\n" + 
+				"<result title=\"Pirates of the Caribbean: On Stranger Tides\" year=\"2011\" imdbID=\"tt1298650\" type=\"movie\" poster=\"https://m.media-amazon.com/images/M/MV5BMjE5MjkwODI3Nl5BMl5BanBnXkFtZTcwNjcwMDk4NA@@._V1_SX300.jpg\"/>\r\n" + 
+				"<result title=\"Pirates of the Caribbean: Dead Men Tell No Tales\" year=\"2017\" imdbID=\"tt1790809\" type=\"movie\" poster=\"https://m.media-amazon.com/images/M/MV5BMTYyMTcxNzc5M15BMl5BanBnXkFtZTgwOTg2ODE2MTI@._V1_SX300.jpg\"/>\r\n" + 
+				"<result title=\"Pirates of the Caribbean: Tales of the Code: Wedlocked\" year=\"2011\" imdbID=\"tt2092452\" type=\"movie\" poster=\"https://m.media-amazon.com/images/M/MV5BZGFiZTQ0MDctM2ViMS00MGEwLWIxNzgtYWUzZDM4N2NiMmQyXkEyXkFqcGdeQXVyNTE1NjY5Mg@@._V1_SX300.jpg\"/>\r\n" + 
+				"<result title=\"An Epic at Sea: The Making of 'Pirates of the Caribbean: The Curse of the Black Pearl'\" year=\"2003\" imdbID=\"tt0395141\" type=\"movie\" poster=\"https://m.media-amazon.com/images/M/MV5BMTM2OTEwNTExNF5BMl5BanBnXkFtZTcwNjM3OTMyMQ@@._V1_SX300.jpg\"/>\r\n" + 
+				"<result title=\"Pirates of the Caribbean: Secrets of Dead Man's Chest\" year=\"2006\" imdbID=\"tt0857391\" type=\"movie\" poster=\"https://m.media-amazon.com/images/M/MV5BNWY5NDEwMTctZmZhMS00MjBhLTkxM2MtZGM3ZWFiN2MxMTk0XkEyXkFqcGdeQXVyNTc0NjY1ODk@._V1_SX300.jpg\"/>\r\n" + 
+				"<result title=\"A Journey Behind the Scenes of 'Pirates of the Caribbean: At World's End'\" year=\"2007\" imdbID=\"tt1053871\" type=\"movie\"/>\r\n" + 
+				"<result title=\"Pirates of the Caribbean: On Stranger Tides 35mm 3D Special\" year=\"2011\" imdbID=\"tt1937286\" type=\"movie\" poster=\"https://m.media-amazon.com/images/M/MV5BMjRjYTY4YjUtMjUzNC00YjNiLTkyYTMtODFhOThmMTNjODliXkEyXkFqcGdeQXVyODQ5NTg5MTk@._V1_SX300.jpg\"/>\r\n" + 
 				"</root>");
 
 		// Find total results count
 		double totalResults = helper.findDouble(response, "/root/@totalResults");
 		System.out.println("Total results = " + totalResults);
 		// Find all nodes with precise title
-		NodeList nodeList = helper.findNodeList(response, "/root/result[@title = 'The Avengers']");
+		String title = "Pirates of the Caribbean:On Stranger Tides";
+		String titleEscaped = StringEscapeUtils.escapeHtml4(title.replaceAll(":([^\\s])", ": $1"));
+		System.out.println(titleEscaped);
+		NodeList nodeList = helper.findNodeList(response, "/root/result[@title = \"" + titleEscaped + "\"]");
 		for (int index = 0; index < nodeList.getLength(); index++) {
 			Node node = nodeList.item(index);
 			System.out.println(node.getAttributes().getNamedItem("imdbID").getNodeValue());

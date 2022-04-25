@@ -26,7 +26,7 @@ import fr.nacvs.ied_mediator.mediator.Mediator;
 public class MultiSourceMediator implements Mediator {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(MultiSourceMediator.class);
-	
+
 	private final FilmDataDao filmDataDao;
 	private final FilmPeopleDao filmPeopleDao;
 	private final FilmSummaryDao filmSummaryDao;
@@ -81,8 +81,11 @@ public class MultiSourceMediator implements Mediator {
 		RespOneFilmOfActor resp = new RespOneFilmOfActor();
 		resp.fillPeopleInfos(filmPeople);
 		filmSummaryDao.findByTitleAndDirector(title, director)
-			.flatMap(fs -> filmDataDao.findByTitleAndDate(fs.getTitle(), fs.getDate()))
-			.ifPresent(resp::fillDataInfos);
+				.ifPresent(fs -> {
+					resp.fillSummaryInfos(fs);
+					filmDataDao.findByTitleAndDate(fs.getTitle(), fs.getDate())
+							.ifPresent(resp::fillDataInfos);
+				});
 		return resp;
 	}
 
