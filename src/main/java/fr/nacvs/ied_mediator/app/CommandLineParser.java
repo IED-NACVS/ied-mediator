@@ -38,7 +38,7 @@ public class CommandLineParser {
 		String requestType = parsedArguments.getOptionValue(REQUEST_OPT, defaultArgs.getRequestType());
 		String query = parsedArguments.getOptionValue(QUERY_OPT);
 		String responseFormat = parsedArguments.getOptionValue(OUTPUT_FORMAT_OPT, defaultArgs.getOutputFormat());
-		String outputPath = parsedArguments.getOptionValue(OUTPUT_FORMAT_OPT, defaultArgs.getOutputPath());
+		String outputPath = parsedArguments.getOptionValue(OUTPUT_FILENAME_OPT, defaultArgs.getOutputPath());
 
 		return new RequestParameters(requestType, query, responseFormat, outputPath);
 	}

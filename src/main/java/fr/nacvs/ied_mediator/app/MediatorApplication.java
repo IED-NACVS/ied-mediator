@@ -35,7 +35,7 @@ public class MediatorApplication {
 		ResponseWriter responseWriter = requestParams.getOutputFormat().createWriter();
 		String outputFile = responseWriter.renameFilename(requestParams.getOutputPath());
 		Path outputPath = Paths.get(outputFile);
-		
+		LOGGER.info("Output path : " + outputFile);
 		switch (requestParams.getRequestType()) {
 		case FILMS_BY_TITLE:
 			handleFilmsByTitle(query, responseWriter, outputPath);

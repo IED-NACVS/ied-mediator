@@ -59,7 +59,6 @@ public class FilmDataJdbcSource implements FilmDataDao {
 			statement.setString(1, title);
 			statement.setInt(2, date.getYear());
 			statement.execute();
-			System.out.println(statement);
 			ResultSet resultSet = statement.getResultSet();
 			FilmData filmData = null;
 			if (resultSet.next()) {

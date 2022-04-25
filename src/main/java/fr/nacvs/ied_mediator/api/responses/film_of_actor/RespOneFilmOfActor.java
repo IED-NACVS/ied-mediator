@@ -39,7 +39,6 @@ public class RespOneFilmOfActor {
 	
 	public void fillPeopleInfos(FilmPeople people) {
 		this.title = people.getTitle();
-		this.date = DateUtils.toString(people.getDate());
 		this.producers = people.getProducers();
 		this.director = people.getDirector();
 	}

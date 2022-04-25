@@ -11,7 +11,9 @@ import java.util.stream.Collectors;
  * @author Aldric Vitali Silvestre
  */
 public enum ResponseFormat {
-	JSON(JsonResponseWriter::new);
+	JSON(JsonResponseWriter::new),
+	XML(XmlResponseWriter::new)
+	;
 	
 	private Supplier<ResponseWriter> supplier;
 
