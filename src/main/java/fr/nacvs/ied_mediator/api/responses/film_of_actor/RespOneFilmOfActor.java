@@ -6,10 +6,11 @@ import java.util.List;
 import fr.nacvs.ied_mediator.business.FilmData;
 import fr.nacvs.ied_mediator.business.FilmPeople;
 import fr.nacvs.ied_mediator.business.FilmSummary;
+import fr.nacvs.ied_mediator.util.DateUtils;
 
 public class RespOneFilmOfActor {
 	private String title;
-	private LocalDate date;
+	private String date;
 	private String genre;
 	private String distributor;
 	private String director;
@@ -22,7 +23,7 @@ public class RespOneFilmOfActor {
 	public RespOneFilmOfActor(String title, LocalDate date, String genre, String distributor, String director, List<String> producers) {
 		super();
 		this.title = title;
-		this.date = date;
+		this.date = DateUtils.toString(date);
 		this.genre = genre;
 		this.distributor = distributor;
 		this.director = director;
@@ -31,20 +32,20 @@ public class RespOneFilmOfActor {
 	
 	public void fillDataInfos(FilmData data) {
 		this.title = data.getTitle();
-		this.date = data.getDate();
+		this.date = DateUtils.toString(data.getDate());
 		this.genre = data.getGenre();
 		this.distributor = data.getDistributor();
 	}
 	
 	public void fillPeopleInfos(FilmPeople people) {
 		this.title = people.getTitle();
-		this.date = people.getDate();
+		this.date = DateUtils.toString(people.getDate());
 		this.producers = people.getProducers();
 		this.director = people.getDirector();
 	}
 	
 	public void fillSummaryInfos(FilmSummary summary) {
-		this.date = summary.getDate();
+		this.date = DateUtils.toString(summary.getDate());
 	}
 
 	public String getTitle() {
@@ -55,11 +56,11 @@ public class RespOneFilmOfActor {
 		this.title = title;
 	}
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

@@ -30,7 +30,7 @@ public class CommandLineParser {
 
 		Options firstOptions = createFirstOptions();
 		Options options = createOptions();
-		CommandLine firstArgumentsParsed = parser.parse(firstOptions, args);
+		CommandLine firstArgumentsParsed = parser.parse(firstOptions, args, true);
 		handleFirstOptions(firstArgumentsParsed, options);
 
 		CommandLine parsedArguments = parser.parse(options, args);

@@ -131,17 +131,8 @@ public class FilmPeopleSparql implements FilmPeopleDao {
 			FilmPeople fp = new FilmPeople();
 			fp.setTitle(titre);
 			fp.setDirector(real);
-			List<String> plist = new ArrayList<>();
-			for (String elt : producers) {
-				plist.add(elt);
-			}
-			fp.setProducers(plist);
-
-			List<String> alist = new ArrayList<>();
-			for (String elt : actors) {
-				alist.add(elt);
-			}
-			fp.setActors(alist);
+			fp.setProducers(Arrays.stream(producers).distinct().collect(Collectors.toList()));
+			fp.setActors(Arrays.stream(actors).distinct().collect(Collectors.toList()));
 			outputList.add(fp);
 
 		}

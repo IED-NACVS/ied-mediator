@@ -7,10 +7,11 @@ import java.util.List;
 import fr.nacvs.ied_mediator.business.FilmData;
 import fr.nacvs.ied_mediator.business.FilmPeople;
 import fr.nacvs.ied_mediator.business.FilmSummary;
+import fr.nacvs.ied_mediator.util.DateUtils;
 
 public class RespOneFilmByTitle {
 
-	private LocalDate date;
+	private String date;
 	private String genre = "";
 	private String distributor = "";
 	private long budget;
@@ -27,7 +28,7 @@ public class RespOneFilmByTitle {
 	public RespOneFilmByTitle(LocalDate date, String genre, String distributor, long budget, long incomeUs, long incomeWorldwide, String summary,
 			List<String> actors) {
 		super();
-		this.date = date;
+		this.date = DateUtils.toString(date);
 		this.genre = genre;
 		this.distributor = distributor;
 		this.budget = budget;
@@ -38,7 +39,7 @@ public class RespOneFilmByTitle {
 	}
 	
 	public void fillDataInfos(FilmData filmData) {
-		this.date = filmData.getDate();
+		this.date = DateUtils.toString(filmData.getDate());
 		this.distributor = filmData.getDistributor();
 		this.budget = filmData.getBudget();
 		this.genre = filmData.getGenre();
@@ -55,11 +56,11 @@ public class RespOneFilmByTitle {
 		this.summary = filmSummary.getSummary();
 	}
 	
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
