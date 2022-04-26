@@ -45,6 +45,7 @@ public class MediatorApplication {
 			handleFilmsByActor(query, responseWriter, outputPath);
 			break;
 		}
+		System.out.println("Output file written to " + outputPath);
 	}
 
 	private void handleFilmsByTitle(String query, ResponseWriter responseWriter, Path outputPath) throws IOException {

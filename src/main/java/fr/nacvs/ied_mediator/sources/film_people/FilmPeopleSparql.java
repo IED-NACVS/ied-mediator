@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.jena.query.ARQ;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
@@ -19,6 +20,10 @@ import fr.nacvs.ied_mediator.dao.FilmPeopleDao;
 public class FilmPeopleSparql implements FilmPeopleDao {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(FilmPeopleSparql.class);
+	
+	public FilmPeopleSparql() {
+		ARQ.init();
+	}
 
 	@Override
 	public Iterator<FilmPeople> findByActor(String actor) {
